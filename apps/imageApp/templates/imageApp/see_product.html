@@ -19,6 +19,7 @@
     <body>
       <div class="container">
         <div class="row">
+           <a class="go_home" href="{%url 'spring:all_show'%}">Back</a>
          <div class="col-xs-4 item-photo">
             <img style="max-width:100%;" src="/media/{{currentProduct.model_pic}}"/>
             </div>
@@ -47,7 +48,7 @@
 
                     <div class="post-heading">
                         <div class="pull-left image">
-                            <img src="/media/{{currentUser.model_pic}}" class="img-circle avatar" alt="user profile image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEfIY5IpftZ2jdQpCHY_RK_h-NZJ2H82hDCw9I8TuVYZKsmqoXx5GcEA" class="img-circle avatar" alt="user profile image">
                         </div>
                         <div class="pull-left meta">
                             <div class="title h5">
@@ -75,14 +76,16 @@
 
 
 
-
+                    {% if currentUser%}
                     <div>
-                      <form>
+                      <form action="{% url 'spring:add_comment' currentProduct.id %}" method="POST">
+                         {% csrf_token %}
                         <textarea class="textbox" type="textarea" name="comment" ></textarea>
                         <br>
-                        <input id="add_button" type="submit" name="add_comment">
+                        <input id="add_button" type="submit" name="add_comment" value="Add">
                       </form>
                     </div>
+                    {%endif%}
                </div>
           </div>
       </div>
