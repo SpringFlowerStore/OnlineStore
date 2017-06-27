@@ -34,6 +34,7 @@ def uploadImage(request):
 
 
 def all_show(request):
+    # Show all products page even if user is not in session
     if request.session['currentUser']:
         context = {
             'yall':Product.objects.all(),
