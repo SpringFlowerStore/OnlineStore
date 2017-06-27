@@ -16,42 +16,46 @@
     <div class="container">
         <div class="jumbotron">
           <h3>Lovely flower shop</h3>
-          <h1>VANESSA</h1>      
-        </div>          
+          <h1>VANESSA</h1>
+        </div>
 
           <ul class="nav nav-justified nav-pills">
               <li class="active"><a href="{%url 'spring:main'%}">Home</a></li>
               <li><a href="{%url 'spring:all_show'%}">All products</a></li>
               <li><a href="#">Contact us</a></li>
-              <li><a href="{% url 'users:index'%}">Create an account</a></li>
+              {% if currUser != None %}
+                <li><a href="{% url 'users:logout'%}">logout</a></li>
+              {% else %}
+                <li><a href="{% url 'users:index'%}">Create an account</a></li>
+              {% endif %}
           </ul>
       </div>
 
     <div class="media">
-        <p class="introducing">INTRODUCING</p> 
+        <p class="introducing">INTRODUCING</p>
         <p class="introducing">________</p>
-        <p class="introducing" id="info_text">A true design that catches attention from every eyes.</p> 
+        <p class="introducing" id="info_text">A true design that catches attention from every eyes.</p>
         <p class="introducing">“It is not enough that we build products that function, that are understandable and usable, we also need to build products that bring joy and excitement, pleasure and fun, and, yes, beauty to people’s lives.”<br>–Don Norman
-        </p>     
+        </p>
         <img id="most_popular_img">
     </div>
     <div class="media" id="img4">
-        <p class="products">OUR PRODUCTS <br> ________</p> 
-        <p class="products" id="info_text">You can buy your favourites, in one go.</p> 
+        <p class="products">OUR PRODUCTS <br> ________</p>
+        <p class="products" id="info_text">You can buy your favourites, in one go.</p>
       <div>
           <img class="image_4">
           <img class="image_4">
           <img class="image_4">
           <img class="image_4">
-      </div>         
+      </div>
           <a href="{%url 'spring:all_show'%}" class="button">Full flower shop!</a>
     </div>
     <div class="media" id="footer">
-        
+
       <div class="footer_blocks">
         <p class="products_footer"> ________VANESSA</p>
         <p class="footer_text">“It is not enough that we build products that function, that are understandable and usable, we also need to build products that bring joy and excitement, pleasure and fun, and, yes, beauty to people’s lives.”<br>–Don Norman
-        </p> 
+        </p>
         <hr>
         <div class="text-center center-block">
             <p class="txt-railway"></p>
@@ -64,7 +68,7 @@
         <hr>
       </div>
       <div class="footer_blocks">
-        <p class="products_footer">Contact</p>  
+        <p class="products_footer">Contact</p>
         <p class="footer_text">10777 Main St #100, Bellevue, WA 98004</p><br><br>
         <hr>
         <p class="footer_text">1info_vanessa@gmail.com.com</p><br><br>
@@ -72,18 +76,18 @@
         <p class="footer_text">VANESSA.com</p><br><br>
         <hr>
       </div>
-      <div class="footer_blocks"> 
-        <p class="products_footer">Our Mission Statement:</p>  
+      <div class="footer_blocks">
+        <p class="products_footer">Our Mission Statement:</p>
         <p class="footer_text">Each day holds a surprise. But only if we expect it can we see, hear, or feel it when it comes to us. Let's not be afraid to receive each day's surprise, whether it comes to us as sorrow or as joy It will open a new place in our hearts, a place where we can welcome new friends and celebrate more fully our shared humanity.</p><br>
-        <hr>       
+        <hr>
       </div>
     </div>
     </div>
 
 
-        
-   
-        
+
+
+
 
 
 

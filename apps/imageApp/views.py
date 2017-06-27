@@ -8,7 +8,15 @@ import bcrypt
 def main(request):
     CSVSTUFF()
     #deleteAllProducts()
-    return render(request, "imageApp/main_page.html")
+    if request.session['currentUser'] != None:
+        context = {
+            'currUser': User.userManager.get(id=request.session['currentUser']),
+        }
+    else:
+        context = {
+            'currUser': None,
+        }
+    return render(request, "imageApp/main_page.html", context)
 
 
 def index(request):
