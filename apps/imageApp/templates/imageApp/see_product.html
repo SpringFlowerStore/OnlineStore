@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Spring Time!!!</title>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    {%load static%}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'imageApp/css/style2.css' %}">
+  </head>
+    <body>
+      <div class="container">
+        <div class="row">
+         <div class="col-xs-4 item-photo">
+            <img style="max-width:100%;" src="/media/{{currentProduct.model_pic}}"/>
+            </div>
+            <div class="col-xs-5" >
+                <!-- Datos del vendedor y titulo del producto -->
+                <h3>{{currentProduct.name}}</h3>
+
+                <!-- Precios -->
+                <h6 class="title-price"><small>PRICE</small></h6>
+                <h3 style="margin-top:0px;">US ${{currentProduct.price}}</h3>
+                <div class="col-md-6">
+                <form  action="" method="post">
+                 {% csrf_token %}
+                  <input class="btn  btn-product bottom" type="submit" name="add" value="Add" >
+                </form>
+              </div>
+            </div>
+            </div>
+            <div class="col-sm-10">
+                <div class="panel panel-white post panel-shadow">
+
+
+
+
+
+
+                    <div class="post-heading">
+                        <div class="pull-left image">
+                            <img src="/media/{{currentUser.model_pic}}" class="img-circle avatar" alt="user profile image">
+                        </div>
+                        <div class="pull-left meta">
+                            <div class="title h5">
+                                <a href="#"><b>{{currentUser.first_name}} {{currentUser.last_name}}</b></a>
+                                made a post.
+                            </div>
+                            <h6 class="text-muted time">1 minute ago</h6>
+                        </div>
+                    </div>
+                    <div class="post-description">
+                        <p>Bootdey is a gallery of free snippets resources templates and utilities for bootstrap css hmtl js framework. Codes for developers and web designers
+                        </p>
+                         <p id="num-likes">
+                            <form id="like_but" action="" method="POST">
+                              {% csrf_token %}
+                              <input id="heart" type="submit" name="like" value=""> 5 likes
+                            </form>
+                        </p>
+                        <hr>
+                    </div>
+
+
+
+
+
+
+
+
+                    <div>
+                      <form>
+                        <textarea class="textbox" type="textarea" name="comment" ></textarea>
+                        <br>
+                        <input id="add_button" type="submit" name="add_comment">
+                      </form>
+                    </div>
+               </div>
+          </div>
+      </div>
+
+
+
+
+
+   </body>
+</html>

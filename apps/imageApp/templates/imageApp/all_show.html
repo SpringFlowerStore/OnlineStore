@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Spring Time!!!</title>
+    {%load static%}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'imageApp/css/style2.css' %}">
+  </head>
+    <body>
+        <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+      {% for i in yall %}
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail" >
+              <form  action="{% url 'spring:see_product' i.id %}" method="post">
+               {% csrf_token %}
+                <input class="btn  btn-product bottom" type="submit" name="see" value="See this product" >
+              </form>
+              <img src="/media/{{i.model_pic}}" class="img-responsive">
+              <div class="caption">
+                <div class="row">
+                  <div class="col-md-6 col-xs-6" id="all_product_names">
+                    <h3>{{i.name}}</h3>
+                  </div>
+                  <div class="col-md-6 col-xs-6 price" id="all_product_prices">
+                    <h3>
+                    <label>${{i.price}}</label></h3>
+                  </div>
+                </div>
+                <p id="all_product_descriptions">{{i.description}}</p>
+                <div class="row">
+                  <div class="col-md-6">
+                    <form  action="" method="post">
+                     {% csrf_token %}
+                      <input class="btn  btn-product" type="submit" name="Like" value="Like" >
+                    </form>
+                  </div>
+                  <div class="col-md-6">
+                    <form  action="{% url 'spring:cart' %}" method="post">
+                     {% csrf_token %}
+                      <input class="btn  btn-product bottom" type="submit" name="add" value="Add" >
+                    </form>
+                  </div>
+          </div>
+        </div>
+      </div>
+ </div>
+ {% endfor %}
+
+  </div>
+</div>
+    </body>
+</html>

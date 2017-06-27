@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>VANESSA</title>
+  <meta charset="utf-8">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  {% load staticfiles %}
+  <link rel="stylesheet" type="text/css" href="{% static 'imageApp/css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+          <h3>Lovely flower shop</h3>
+          <h1>VANESSA</h1>      
+        </div>          
+
+          <ul class="nav nav-justified nav-pills">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="{%url 'spring:all_show'%}">All products</a></li>
+              <li><a href="#">Contact us</a></li>
+              <li><a href="{% url 'users:index'%}">Create an account</a></li>
+          </ul>
+      </div>
+
+    <div class="media">
+        <p class="introducing">INTRODUCING</p> 
+        <p class="introducing">________</p>
+        <p class="introducing" id="info_text">A true design that catches attention from every eyes.</p> 
+        <p class="introducing">“It is not enough that we build products that function, that are understandable and usable, we also need to build products that bring joy and excitement, pleasure and fun, and, yes, beauty to people’s lives.”<br>–Don Norman
+        </p>     
+        <img id="most_popular_img">
+    </div>
+    <div class="media" id="img4">
+        <p class="products">OUR PRODUCTS <br> ________</p> 
+        <p class="products" id="info_text">You can buy your favourites, in one go.</p> 
+      <div>
+          <img class="image_4">
+          <img class="image_4">
+          <img class="image_4">
+          <img class="image_4">
+      </div>         
+          <a href="{%url 'spring:all_show'%}" class="button">Full flower shop!</a>
+    </div>
+    <div class="media" id="footer">
+        
+      <div class="footer_blocks">
+        <p class="products_footer"> ________VANESSA</p>
+        <p class="footer_text">“It is not enough that we build products that function, that are understandable and usable, we also need to build products that bring joy and excitement, pleasure and fun, and, yes, beauty to people’s lives.”<br>–Don Norman
+        </p> 
+        <hr>
+        <div class="text-center center-block">
+            <p class="txt-railway"></p>
+            <br />
+              <a href="https://www.facebook.com/bootsnipp"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
+              <a href="https://twitter.com/bootsnipp"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
+              <a href="https://plus.google.com/+Bootsnipp-page"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
+              <a href="https://www.google.com"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
+        </div>
+        <hr>
+      </div>
+      <div class="footer_blocks">
+        <p class="products_footer">Contact</p>  
+        <p class="footer_text">10777 Main St #100, Bellevue, WA 98004</p><br><br>
+        <hr>
+        <p class="footer_text">1info_vanessa@gmail.com.com</p><br><br>
+        <hr>
+        <p class="footer_text">VANESSA.com</p><br><br>
+        <hr>
+      </div>
+      <div class="footer_blocks"> 
+        <p class="products_footer">Our Mission Statement:</p>  
+        <p class="footer_text">Each day holds a surprise. But only if we expect it can we see, hear, or feel it when it comes to us. Let's not be afraid to receive each day's surprise, whether it comes to us as sorrow or as joy It will open a new place in our hearts, a place where we can welcome new friends and celebrate more fully our shared humanity.</p><br>
+        <hr>       
+      </div>
+    </div>
+    </div>
+
+
+        
+   
+        
+
+
+
+</body>
+</html>
