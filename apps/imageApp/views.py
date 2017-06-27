@@ -55,9 +55,15 @@ def all_show(request):
     return render(request, "imageApp/all_show.html", context)
 
 def see_product(request, id):
-    context = {
-        'currentProduct':Product.objects.get(id=id),
-    }
+    if request.session['currentUser']:
+        context = {
+            'currentProduct':Product.objects.get(id=id),
+            'currentUser':User.userManager.get(id=request.session['currentUser']),
+        }
+    else:
+        context={
+            'currentProduct': Product.objects.get(id=id),
+        }
 
     return render(request, "imageApp/see_product.html", context)
 
@@ -109,3 +115,6 @@ def allImages(request):
         'currentUserImages':User.userManager.filter(id=request.session['currentUser']),
     }
     return render(request, "imageApp/index2.html", context)
+
+def add_comment(request, id):
+    return redirect('spring:see_product', id)
