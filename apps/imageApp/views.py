@@ -34,10 +34,16 @@ def uploadImage(request):
 
 
 def all_show(request):
-    context = {
-        'yall':Product.objects.all(),
-        'currUser':User.userManager.get(id=request.session['currentUser']),
-    }
+    # Show all products page even if user is not in session
+    if request.session['currentUser']:
+        context = {
+            'yall':Product.objects.all(),
+            'currUser':User.userManager.get(id=request.session['currentUser']),
+        }
+    else:
+        context={
+            'yall': Product.objects.all(),
+        }
     return render(request, "imageApp/all_show.html", context)
 
 def see_product(request, id):
