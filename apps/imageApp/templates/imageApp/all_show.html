@@ -39,18 +39,20 @@
                 </div>
                 <p id="all_product_descriptions">{{i.description}}</p>
                 <div class="row">
-                  <div class="col-md-6">
-                    <form  action="" method="post">
-                     {% csrf_token %}
-                      <input class="btn  btn-product" type="submit" name="Like" value="Like" >
-                    </form>
-                  </div>
-                  <div class="col-md-6">
-                    <form  action="{% url 'spring:cart' %}" method="post">
-                     {% csrf_token %}
-                      <input class="btn  btn-product bottom" type="submit" name="add" value="Add" >
-                    </form>
-                  </div>
+                    {% if currUser %}
+                      <div class="col-md-6">
+                          <form  action="" method="post">
+                          {% csrf_token %}
+                            <input class="btn  btn-product" type="submit" name="Like" value="Like" >
+                          </form>
+                      </div>
+                    {% endif %}
+                      <div class="col-md-6">
+                        <form  action="{% url 'spring:cart' %}" method="post">
+                        {% csrf_token %}
+                          <input class="btn  btn-product bottom" type="submit" name="add" value="Add" >
+                        </form>
+                      </div>
           </div>
         </div>
       </div>
