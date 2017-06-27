@@ -16,6 +16,6 @@ urlpatterns = [
     url(r'^like/(?P<id>\d+)$', views.likeProduct, name= "like"),
 =======
     url(r'^add_comment/(?P<id>\d+)$', views.add_comment, name = "add_comment"),
-    
+
 >>>>>>> 82d77070c6aa8a0bf96939d85e5b84e650c0e48a
 ]

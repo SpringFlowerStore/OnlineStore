@@ -58,9 +58,11 @@ def all_show(request):
     return render(request, "imageApp/all_show.html", context)
 
 def see_product(request, id):
+<<<<<<< HEAD
     context = {
         'currentProduct':Product.pManager.get(id=id),
     }
+=======
     if request.session['currentUser']:
         context = {
             'currentProduct':Product.objects.get(id=id),
@@ -70,6 +72,8 @@ def see_product(request, id):
         context={
             'currentProduct': Product.objects.get(id=id),
         }
+>>>>>>> 82d77070c6aa8a0bf96939d85e5b84e650c0e48a
+
     return render(request, "imageApp/see_product.html", context)
 
 def cart():
@@ -121,9 +125,13 @@ def allImages(request):
     }
     return render(request, "imageApp/index2.html", context)
 
+<<<<<<< HEAD
+
 def likeProduct(request, id):
     if request.method == "POST":
         result = Product.pManager.addNewLike(id, request.session['currentUser'])
     return redirect('spring:all_show');
+=======
 def add_comment(request, id):
     return redirect('spring:see_product', id)
+>>>>>>> 82d77070c6aa8a0bf96939d85e5b84e650c0e48a
