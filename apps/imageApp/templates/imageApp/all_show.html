@@ -16,9 +16,17 @@
     <link rel="stylesheet" type="text/css" href="{% static 'imageApp/css/style2.css' %}">
   </head>
     <body>
-        <div class="container">
+     
+
+
+
+  <div class="container">
+    
     <div class="row">
+          <a class="go_home" href="{%url 'spring:main'%}">Home</a>
+      
       <div class="col-md-12">
+        
       {% for i in yall %}
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail" >
