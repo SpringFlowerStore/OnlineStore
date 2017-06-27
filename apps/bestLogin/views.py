@@ -45,4 +45,4 @@ def success(request):
 def logout(request):
     request.session['currentUser'] = None
     messages.success(request, "You have been successfully logged out!")
-    return redirect('users:index')
+    return redirect('spring:main')

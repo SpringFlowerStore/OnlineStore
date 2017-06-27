@@ -4,6 +4,7 @@ from .models import Product, Review
 from ..bestLogin.models import User
 from .helpercsv import CSVSTUFF, deleteAllProducts
 import bcrypt
+from django.db.models import Count
 
 def main(request):
     CSVSTUFF()
@@ -26,7 +27,7 @@ def index(request):
         if deleteAllProducts():
             print "CSV AND DATABASE GONE!"
     form = ImageUploadForm()
-    return render(request, "imageApp/index.html", {'form':form, 'stuff':Product.objects.all()})
+    return render(request, "imageApp/index.html", {'form':form, 'stuff':Product.pManager.all()})
 
 def uploadImage(request):
     if request.method == 'POST':
@@ -45,18 +46,20 @@ def all_show(request):
     # Show all products page even if user is not in session
     if request.session['currentUser']:
         context = {
-            'yall':Product.objects.all(),
+            'yall':Product.pManager.all(),
             'currUser':User.userManager.get(id=request.session['currentUser']),
+            'numLikes':Product.pManager.annotate(num_likes=Count('likes')),
         }
     else:
         context={
-            'yall': Product.objects.all(),
+            'yall': Product.pManager.all(),
+            'numLikes':Product.pManager.annotate(num_likes=Count('likes')),
         }
     return render(request, "imageApp/all_show.html", context)
 
 def see_product(request, id):
     context = {
-        'currentProduct':Product.objects.get(id=id),
+        'currentProduct':Product.pManager.get(id=id),
     }
 
     return render(request, "imageApp/see_product.html", context)
@@ -64,7 +67,7 @@ def see_product(request, id):
 def cart():
     context = {
         'currUser':User.userManager.get(id=request.session['currentUser']),
-        'cartItems':Product.objects.all(),
+        'cartItems':Product.pManager.all(),
     }
     return render(request, "imageApp/cart.html", context)
 
@@ -109,3 +112,9 @@ def allImages(request):
         'currentUserImages':User.userManager.filter(id=request.session['currentUser']),
     }
     return render(request, "imageApp/index2.html", context)
+
+
+def likeProduct(request, id):
+    if request.method == "POST":
+        result = Product.pManager.addNewLike(id, request.session['currentUser'])
+    return redirect('spring:all_show');

@@ -40,10 +40,16 @@
                 <p id="all_product_descriptions">{{i.description}}</p>
                 <div class="row">
                   <div class="col-md-6">
-                    <form  action="" method="post">
+                    <form  action="{% url 'spring:like' id=i.id %}" method="post">
                      {% csrf_token %}
                       <input class="btn  btn-product" type="submit" name="Like" value="Like" >
                     </form>
+                    <p>Likes: </p>
+                    {% for count in numLikes %}
+                    {% if forloop.counter == forloop.parentloop.counter %}
+                      {{ count.num_likes }}
+                      {% endif %}
+                    {% endfor %}
                   </div>
                   <div class="col-md-6">
                     <form  action="{% url 'spring:cart' %}" method="post">
