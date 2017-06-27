@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^show$', views.all_show, name = "all_show"),
     url(r'^see_product/(?P<id>\d+)$', views.see_product, name = "see_product"),
     url(r'^cart$', views.cart, name = "cart"),
+    url(r'^like/(?P<id>\d+)$', views.likeProduct, name= "like"),
 ]

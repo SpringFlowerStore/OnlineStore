@@ -7,6 +7,17 @@ from smartfields.dependencies import FileDependency
 from smartfields.processors import ImageProcessor
 
 
+class ProductManager(models.Manager):
+    def addNewLike(self, likeId, userId):
+        print "Like ID:"
+        print likeId
+        print "User ID:"
+        print userId
+        selected_user = User.userManager.get(id=userId)
+        like = self.get(id=likeId)
+        like.likes.add(selected_user)
+        like.save()
+
 class Product(models.Model):
     name = models.CharField(max_length=200)
     code = models.CharField(max_length=200)
@@ -25,7 +36,7 @@ class Product(models.Model):
     ])
     model_jpeg = fields.ImageField(upload_to='imageApp/images/products/')
 
-
+    pManager = ProductManager()
 
     # def save(self, *args, **kwargs):
     #     if self.model_pic:
