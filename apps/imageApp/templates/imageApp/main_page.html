@@ -37,16 +37,17 @@
         <p class="introducing" id="info_text">A true design that catches attention from every eyes.</p>
         <p class="introducing">“It is not enough that we build products that function, that are understandable and usable, we also need to build products that bring joy and excitement, pleasure and fun, and, yes, beauty to people’s lives.”<br>–Don Norman
         </p>
-        <img id="most_popular_img">
+        {% for count in topLiked %}
+        <img src="/media/{{count.model_pic}}" id="most_popular_img">
+        {% endfor %}
     </div>
     <div class="media" id="img4">
         <p class="products">OUR PRODUCTS <br> ________</p>
         <p class="products" id="info_text">You can buy your favourites, in one go.</p>
       <div>
-          <img class="image_4">
-          <img class="image_4">
-          <img class="image_4">
-          <img class="image_4">
+          {% for count in mostLiked %}
+          <img src="/media/{{count.model_pic}}" class="image_4">
+          {% endfor %}
       </div>
           <a href="{%url 'spring:all_show'%}" class="button">Full flower shop!</a>
     </div>

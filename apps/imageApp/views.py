@@ -9,13 +9,19 @@ from django.db.models import Count
 def main(request):
     CSVSTUFF()
     #deleteAllProducts()
+    #countlikes = Secret.sManager.annotate(num_likes=Count('user_likes')).order_by('-num_likes')[:5]
+
     if request.session['currentUser'] != None:
         context = {
             'currUser': User.userManager.get(id=request.session['currentUser']),
+            'topLiked': Product.pManager.annotate(num_likes=Count('likes')).all()[:1],
+            'mostLiked': Product.pManager.annotate(num_likes=Count('likes')).all()[1:5],
         }
     else:
         context = {
             'currUser': None,
+            'topLiked': Product.pManager.annotate(num_likes=Count('likes')).all()[:1],
+            'mostLiked': Product.pManager.annotate(num_likes=Count('likes')).all()[1:5],
         }
     return render(request, "imageApp/main_page.html", context)
 
@@ -72,7 +78,7 @@ def see_product(request, id):
         }
     return render(request, "imageApp/see_product.html", context)
 
-def cart():
+def cart(request, id):
     context = {
         'currUser':User.userManager.get(id=request.session['currentUser']),
         'cartItems':Product.pManager.all(),
