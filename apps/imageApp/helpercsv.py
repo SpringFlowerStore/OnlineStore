@@ -46,13 +46,13 @@ def readinImageList():
     someLIST = []
     finalFormStr = ""
     your_media_root += "imageApp/images/products"
-    print Product.objects.all()
+    print Product.pManager.all()
     for filename in glob.glob(your_media_root+'/*.jpg'):
         newStr = str(filename).split('\\')
         print newStr[len(newStr)-1]
         finalFormStr = "imageApp/images/products/" + newStr[len(newStr)-1]
         someLIST.append(finalFormStr)
-        if not Product.objects.filter(model_pic=finalFormStr):
+        if not Product.pManager.filter(model_pic=finalFormStr):
             image_list.append(finalFormStr)
             print "DOESNT EXIST"
         else:
@@ -65,7 +65,7 @@ def readinImageList():
 
 # MAKE A CSV AND CHECK IF ITS NEEDS TO BE CREATED (CSV should only contain new images and they cannot exist in database)
 def readAndAddNewCSV(list, list2):
-    someNumber = Product.objects.all().count()
+    someNumber = Product.pManager.all().count()
     numberOfFiles = len(list) + len(list2)/2
     if someNumber <= numberOfFiles:
         with open('testfile.csv', 'a+') as f:
@@ -134,9 +134,9 @@ def addCSVtoDB(list):
         reader = csv.reader(f, delimiter=',')
 
         for row in reader:
-            if not Product.objects.filter(model_pic=row[4]):
+            if not Product.pManager.filter(model_pic=row[4]):
                 print "Create Product"
                 Product.objects.create(name=row[0], code=row[1], description=row[2], price=row[3], model_pic=row[4])
-            elif not Product.objects.filter(name=row[0]) or not Product.objects.filter(code=row[1]) or not Product.objects.filter(description=row[2]) or not Product.objects.filter(price=row[3]):
+            elif not Product.pManager.filter(name=row[0]) or not Product.pManager.filter(code=row[1]) or not Product.pManager.filter(description=row[2]) or not Product.pManager.filter(price=row[3]):
                 print "Change Product"
-                Product.objects.filter(model_pic=row[4]).update(name=row[0], code=row[1], description=row[2], price=row[3], model_pic=row[4])
+                Product.pManager.filter(model_pic=row[4]).update(name=row[0], code=row[1], description=row[2], price=row[3], model_pic=row[4])

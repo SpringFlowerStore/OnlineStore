@@ -4,17 +4,24 @@ from .models import Product, Review
 from ..bestLogin.models import User
 from .helpercsv import CSVSTUFF, deleteAllProducts
 import bcrypt
+from django.db.models import Count
 
 def main(request):
     CSVSTUFF()
     #deleteAllProducts()
+    #countlikes = Secret.sManager.annotate(num_likes=Count('user_likes')).order_by('-num_likes')[:5]
+
     if request.session['currentUser'] != None:
         context = {
             'currUser': User.userManager.get(id=request.session['currentUser']),
+            'topLiked': Product.pManager.annotate(num_likes=Count('likes')).all()[:1],
+            'mostLiked': Product.pManager.annotate(num_likes=Count('likes')).all()[1:5],
         }
     else:
         context = {
             'currUser': None,
+            'topLiked': Product.pManager.annotate(num_likes=Count('likes')).all()[:1],
+            'mostLiked': Product.pManager.annotate(num_likes=Count('likes')).all()[1:5],
         }
     return render(request, "imageApp/main_page.html", context)
 
@@ -26,7 +33,7 @@ def index(request):
         if deleteAllProducts():
             print "CSV AND DATABASE GONE!"
     form = ImageUploadForm()
-    return render(request, "imageApp/index.html", {'form':form, 'stuff':Product.objects.all()})
+    return render(request, "imageApp/index.html", {'form':form, 'stuff':Product.pManager.all()})
 
 def uploadImage(request):
     if request.method == 'POST':
@@ -45,16 +52,21 @@ def all_show(request):
     # Show all products page even if user is not in session
     if request.session['currentUser']:
         context = {
-            'yall':Product.objects.all(),
+            'yall':Product.pManager.all(),
             'currUser':User.userManager.get(id=request.session['currentUser']),
+            'numLikes':Product.pManager.annotate(num_likes=Count('likes')),
         }
     else:
         context={
-            'yall': Product.objects.all(),
+            'yall': Product.pManager.all(),
+            'numLikes':Product.pManager.annotate(num_likes=Count('likes')),
         }
     return render(request, "imageApp/all_show.html", context)
 
 def see_product(request, id):
+    context = {
+        'currentProduct':Product.pManager.get(id=id),
+    }
     if request.session['currentUser']:
         context = {
             'currentProduct':Product.objects.get(id=id),
@@ -64,13 +76,12 @@ def see_product(request, id):
         context={
             'currentProduct': Product.objects.get(id=id),
         }
-
     return render(request, "imageApp/see_product.html", context)
 
-def cart():
+def cart(request, id):
     context = {
         'currUser':User.userManager.get(id=request.session['currentUser']),
-        'cartItems':Product.objects.all(),
+        'cartItems':Product.pManager.all(),
     }
     return render(request, "imageApp/cart.html", context)
 
@@ -116,5 +127,9 @@ def allImages(request):
     }
     return render(request, "imageApp/index2.html", context)
 
+def likeProduct(request, id):
+    if request.method == "POST":
+        result = Product.pManager.addNewLike(id, request.session['currentUser'])
+    return redirect('spring:all_show');
 def add_comment(request, id):
     return redirect('spring:see_product', id)
